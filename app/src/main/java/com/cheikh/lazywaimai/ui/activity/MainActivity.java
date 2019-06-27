@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
-import butterknife.Bind;
+import butterknife.BindView;
 import com.cheikh.lazywaimai.R;
 import com.cheikh.lazywaimai.base.BaseActivity;
 import com.cheikh.lazywaimai.base.BaseController;
@@ -36,10 +36,10 @@ import com.cheikh.lazywaimai.util.MainTab;
 public class MainActivity extends BaseActivity<MainController.MainUiCallbacks>
         implements MainController.MainHomeUi {
 
-    @Bind(R.id.viewpager)
+    @BindView(R.id.viewpager)
     ViewPager mViewPager;
 
-    @Bind(R.id.viewpager_tab)
+    @BindView(R.id.viewpager_tab)
     SmartTabLayout mViewpagerTab;
 
     private DoubleExitUtil mDoubleClickExit;
@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity<MainController.MainUiCallbacks>
     }
 
     @Override
-    protected void initialViews(Bundle savedInstanceState) {
+    protected void initializeViews(Bundle savedInstanceState) {
         final LayoutInflater inflater = LayoutInflater.from(this);
         final int[] tabIcons = {R.drawable.tab_ic_home, R.drawable.tab_ic_orders, R.drawable.tab_ic_me};
         final int[] tabTitles = {R.string.tab_home, R.string.tab_orders, R.string.tab_me};

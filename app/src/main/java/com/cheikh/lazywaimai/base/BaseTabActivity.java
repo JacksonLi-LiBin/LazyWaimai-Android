@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import java.util.ArrayList;
 import java.util.List;
-import butterknife.Bind;
+import butterknife.BindView;
 import com.cheikh.lazywaimai.R;
 import com.cheikh.lazywaimai.util.ContentView;
 import com.cheikh.lazywaimai.widget.SlidingTabLayout;
@@ -21,10 +21,10 @@ public abstract class BaseTabActivity<UC> extends BaseActivity<UC> {
 
     private static final String SAVE_SELECTED_TAB = "selected_tab";
 
-    @Bind(R.id.viewpager_tabs)
+    @BindView(R.id.viewpager_tabs)
     SlidingTabLayout mSlidingTabStrip;
 
-    @Bind(R.id.viewpager)
+    @BindView(R.id.viewpager)
     ViewPager mViewPager;
 
     private TabPagerAdapter mAdapter;
@@ -32,7 +32,7 @@ public abstract class BaseTabActivity<UC> extends BaseActivity<UC> {
     private int mCurrentItem;
 
     @Override
-    protected void initialViews(Bundle savedInstanceState) {
+    protected void initializeViews(Bundle savedInstanceState) {
         mAdapter = new TabPagerAdapter(getSupportFragmentManager());
 
         mViewPager.setAdapter(mAdapter);

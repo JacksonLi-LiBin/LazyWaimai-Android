@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import com.cheikh.lazywaimai.R;
@@ -32,19 +32,19 @@ import com.cheikh.lazywaimai.widget.CountDownTimerView;
 public class RegisterSecondStepFragment extends BaseFragment<UserController.UserUiCallbacks>
         implements UserController.RegisterSecondStepUi {
 
-    @Bind(R.id.txt_title)
+    @BindView(R.id.txt_title)
     TextView mTitleTxt;
 
-    @Bind(R.id.edit_code)
+    @BindView(R.id.edit_code)
     EditText mCodeEdit;
 
-    @Bind(R.id.btn_clear_code)
+    @BindView(R.id.btn_clear_code)
     ImageView mClearCodeBtn;
 
-    @Bind(R.id.btn_send_code)
+    @BindView(R.id.btn_send_code)
     CountDownTimerView mSendCodeBtn;
 
-    @Bind(R.id.btn_submit)
+    @BindView(R.id.btn_submit)
     Button mSubmitCodeBtn;
 
     private String mMobile;
@@ -74,25 +74,26 @@ public class RegisterSecondStepFragment extends BaseFragment<UserController.User
     }
 
     @Override
-    protected void initialViews(Bundle savedInstanceState) {
+    protected void initializeViews(Bundle savedInstanceState) {
         mTitleTxt.setText(getString(R.string.label_send_code_title, mMobile));
-        mSendCodeBtn.setOnCountDownListener(new CountDownTimerView.OnCountDownListener() {
-            @Override
-            public boolean onCountDownFinishState() {
-                if (mCodeEdit != null) {
-                    return !TextUtils.isEmpty(mCodeEdit.getText().toString());
-                }
-                return false;
-            }
-        });
-        mSendCodeBtn.countDown(30000);
+        // 开始倒计时
+        mSendCodeBtn.startCountDown(30000);
         ToastUtil.showToast(R.string.toast_success_send_sms_code);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // destroy前一定要取消计时，否则会内存泄露
+        if (mSendCodeBtn != null) {
+            mSendCodeBtn.cancelCountDown();
+        }
     }
 
     @Override
     public void sendCodeFinish() {
         // 开始倒计时
-        mSendCodeBtn.countDown(30000);
+        mSendCodeBtn.startCountDown(30000);
         cancelLoading();
         ToastUtil.showToast(R.string.toast_success_send_sms_code);
     }

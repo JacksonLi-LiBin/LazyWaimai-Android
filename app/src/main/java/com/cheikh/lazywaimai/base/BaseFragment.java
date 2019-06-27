@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.cheikh.lazywaimai.R;
 import com.cheikh.lazywaimai.util.ContentView;
@@ -22,7 +22,7 @@ import com.cheikh.lazywaimai.widget.LoadingDialog;
 public abstract class BaseFragment<UC> extends CoreFragment<UC> {
 
     @Nullable
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
     private LoadingDialog mLoading;
@@ -37,13 +37,7 @@ public abstract class BaseFragment<UC> extends CoreFragment<UC> {
         ButterKnife.bind(this, view);
         initialToolbar();
         handleArguments(getArguments());
-        initialViews(savedInstanceState);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
+        initializeViews(savedInstanceState);
     }
 
     protected int getLayoutResId() {
@@ -69,7 +63,7 @@ public abstract class BaseFragment<UC> extends CoreFragment<UC> {
 
     protected void handleArguments(Bundle arguments) {}
 
-    protected void initialViews(Bundle savedInstanceState) {}
+    protected void initializeViews(Bundle savedInstanceState) {}
 
     protected Toolbar getToolbar() {
         return mToolbar;

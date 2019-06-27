@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 import com.cheikh.lazywaimai.R;
 import com.cheikh.lazywaimai.base.BaseActivity;
@@ -28,25 +28,25 @@ import com.cheikh.lazywaimai.util.ToastUtil;
 public class UpdateAddressActivity extends BaseActivity<AddressController.AddressUiCallbacks>
         implements AddressController.UpdateAddressUi {
 
-    @Bind(R.id.et_input_name)
+    @BindView(R.id.et_input_name)
     EditText mNameEdit;
 
-    @Bind(R.id.rb_male)
+    @BindView(R.id.rb_male)
     RadioButton mMaleRadioButton;
 
-    @Bind(R.id.rb_female)
+    @BindView(R.id.rb_female)
     RadioButton mFemaleRadioButton;
 
-    @Bind(R.id.et_input_phone)
+    @BindView(R.id.et_input_phone)
     EditText mPhoneEdit;
 
-    @Bind(R.id.et_poi_address)
+    @BindView(R.id.et_poi_address)
     EditText mPoiAddressEdit;
 
-    @Bind(R.id.et_detail_address)
+    @BindView(R.id.et_detail_address)
     EditText mDetailAddressEdit;
 
-    @Bind(R.id.btn_submit)
+    @BindView(R.id.btn_submit)
     Button mModifyOrCreateBtn;
 
     private Address mOriginalAddress;
@@ -62,7 +62,7 @@ public class UpdateAddressActivity extends BaseActivity<AddressController.Addres
     }
 
     @Override
-    protected void initialViews(Bundle savedInstanceState) {
+    protected void initializeViews(Bundle savedInstanceState) {
         if (mOriginalAddress != null) {
             setTitle(R.string.title_change_address);
             mNameEdit.setText(mOriginalAddress.getName());
